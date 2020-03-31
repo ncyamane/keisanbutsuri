@@ -1,4 +1,4 @@
-#include "include/all.h"
+#include <include/all.h>
 
 // Gaussian Elimination with partial pivoting
 
@@ -14,7 +14,7 @@ void Printmatrix(uint32_t row_size, uint32_t column_size, double *matrix) {
     printf("\n");
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     double mat_a[DIM * DIM] = {1, -4, 3, 1, -5, 2, 1, -1, 1};
     Printmatrix(DIM, DIM, mat_a);
 

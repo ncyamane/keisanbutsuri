@@ -1,7 +1,6 @@
-#include "include/all.h"
+#include <include/all.h>
 
-int main()
-{
+int main(int argc, char *argv[]) {
     float a_f = sqrt(2);
     double a_d = sqrt(2);
     long double a = sqrt(2);

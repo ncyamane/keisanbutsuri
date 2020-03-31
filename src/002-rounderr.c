@@ -1,7 +1,6 @@
-#include "include/all.h"
+#include <include/all.h>
 
-int main()
-{
+int main(int argc, char *argv[]) {
     uint32_t count = 100000000;
     double h = 1.0 / count;
     double Integral = 0.0;
@@ -9,8 +8,7 @@ int main()
 
     clock_t start = clock();
 
-    for (uint32_t i = 0; i < count; i++)
-    {
+    for (uint32_t i = 0; i < count; i++) {
         double a = 1.0 + h * i;
 
         Integral += h / (a * a);
