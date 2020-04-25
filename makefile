@@ -1,21 +1,40 @@
-SUFFIXE 	:= .c
-COMPILER	:= gcc
+CSUFFIXE 	:= .c
+CPPSUFFIXE 	:= .cpp
+
+CC			:= gcc
 CFLAGS		:= -std=c11 -g
+
+CPP 		:= g++
+CPPFLAGS	:= -std=c++17 -g
+
 LDFLAGS		:=
 LIBS		:= -lm
 
-SRCDIR		:= src
+CSRCDIR		:= csrc
+CPPSRCDIR	:= cppsrc
+
 INCLUDE		:= -I./include
-EXEDIR		:= bin
 
-SOURCES 	:= $(wildcard $(SRCDIR)/*$(SUFFIXE))
-OBJECT		:= $(patsubst $(SRCDIR)/%.c,$(EXEDIR)/%,$(SOURCES))
+CEXEDIR		:= cbin
+CPPEXEDIR	:= cppbin
 
-.PHONY: all
-all: $(OBJECT)
+CSOURCES 	:= $(wildcard $(CSRCDIR)/*$(SUFFIXE))
+CPPSOURCES 	:= $(wildcard $(CPPSRCDIR)/*$(CPPSUFFIXE))
 
-$(EXEDIR)/%:$(SRCDIR)/%.c
-	$(COMPILER) $(INCLUDE) $(CFLAGS) $(LIBS) -o $@ $<
+COBJECT		:= $(patsubst $(CSRCDIR)/%.c,$(CEXEDIR)/%,$(CSOURCES))
+CPPOBJECT	:= $(patsubst $(CPPSRCDIR)/%.cpp,$(CPPEXEDIR)/%,$(CPPSOURCES))
+
+.PHONY: call
+call: $(COBJECT)
+
+.PHONY: cppall
+cppall: $(CPPOBJECT)
+
+$(CEXEDIR)/%:$(CSRCDIR)/%.c
+	$(CC) $(INCLUDE) $(CFLAGS) $(LIBS) -o $@ $<
+
+$(CPPEXEDIR)/%:$(CPPSRCDIR)/%.cpp
+	$(CPP) $(INCLUDE) $(CPPFLAGS) $(LIBS) -o $@ $<
 
 .PHONY: clean
 clean:
